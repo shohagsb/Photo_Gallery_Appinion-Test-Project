@@ -1,7 +1,12 @@
 package me.shohag.appiniontestproject.photo_gallery.ui.photo
 
 import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PhotoViewModel : ViewModel() {
+@HiltViewModel
+class PhotoViewModel @Inject constructor(
+
+) : ViewModel() {
 
 }
