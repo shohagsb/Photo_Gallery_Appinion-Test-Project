@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import me.shohag.appiniontestproject.photo_gallery.data.model.PhotoResponse
 import me.shohag.appiniontestproject.photo_gallery.data.repository.GalleryRepository
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,10 +21,13 @@ class GalleryViewModel @Inject constructor(
     val photos: LiveData<PhotoResponse>
         get() = _photos
 
-    fun getPhotos(query: String, page: Int, perPage: Int) {
+
+    fun getPhotos(query: String) {
         viewModelScope.launch {
-            repository.getPhotos(query, page, perPage)
-                .catch { }
+            repository.getPhotos(query)
+                .catch {
+                    Timber.d("GalleryVM: %s", it.message)
+                }
                 .collect { photoResponse ->
                     _photos.value = photoResponse
                 }

@@ -11,11 +11,17 @@ interface GalleryServices {
         private const val CLIENT_ID = BuildConfig.UNSPLASH_ACESS_KEY
     }
 
+    /**
+     * Get searched photo from Unplash API
+     * @param
+     * query : String
+     *
+     * @return
+     * PhotoResponse
+     * */
     @Headers("Authorization: Client-ID $CLIENT_ID")
     @GET("search/photos")
     suspend fun getPhotos(
         @Query ("query")  query: String,
-        @Query ("page")  page: Int,
-        @Query ("per_page")  perPage: Int
     ) : PhotoResponse
 }
