@@ -17,5 +17,9 @@
         android:id="@+id/photoFragment"
         android:name="me.shohag.appiniontestproject.photo_gallery.ui.photo.PhotoFragment"
         android:label="Photo"
-        tools:layout="@layout/fragment_photo" />
+        tools:layout="@layout/fragment_photo" >
+        <argument
+            android:name="unsplash_photo"
+            app:argType="me.shohag.appiniontestproject.photo_gallery.data.model.PhotoResponse$UnsplashPhoto" />
+    </fragment>
 </navigation>

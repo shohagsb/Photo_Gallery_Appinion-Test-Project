@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import me.shohag.appiniontestproject.databinding.ItemUnsplashPhotoBinding
 import me.shohag.appiniontestproject.photo_gallery.data.model.PhotoResponse
 
-class GalleryAdapter :
+class GalleryAdapter(val listener: PhotoListener) :
     ListAdapter<PhotoResponse.UnsplashPhoto, GalleryAdapter.ViewHolder>(DiffCallback) {
     class ViewHolder private constructor(
         private val binding: ItemUnsplashPhotoBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(photo: PhotoResponse.UnsplashPhoto) {
+        fun bind(photo: PhotoResponse.UnsplashPhoto, listener: PhotoListener) {
             binding.photo = photo
+            binding.listener = listener
             binding.executePendingBindings()
 
         }
@@ -33,7 +34,7 @@ class GalleryAdapter :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), listener)
     }
 
     companion object DiffCallback :
@@ -53,4 +54,8 @@ class GalleryAdapter :
         }
 
     }
+}
+
+class PhotoListener(val clickListener: (photo: PhotoResponse.UnsplashPhoto) -> Unit) {
+    fun onClick(photo: PhotoResponse.UnsplashPhoto) = clickListener(photo)
 }

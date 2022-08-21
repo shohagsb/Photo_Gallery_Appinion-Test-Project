@@ -9,10 +9,14 @@
             name="photo"
             type="me.shohag.appiniontestproject.photo_gallery.data.model.PhotoResponse.UnsplashPhoto" />
 
+        <variable
+            name="listener"
+            type="me.shohag.appiniontestproject.photo_gallery.adapter.PhotoListener" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:onClick="@{()->listener.onClick(photo)}"
         android:layout_height="250dp">
 
         <ImageView
