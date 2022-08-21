@@ -18,11 +18,6 @@ class GalleryFragment : Fragment() {
     private lateinit var _binding: FragmentGalleryBinding
     private val viewModel: GalleryViewModel by viewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel.getPhotos("cats")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +29,18 @@ class GalleryFragment : Fragment() {
         return _binding.root
     }
 
+    /**
+     * Recycler-View Adapter
+     * */
     private val adapter = GalleryAdapter(PhotoListener {
         this@GalleryFragment.findNavController().navigate(
             GalleryFragmentDirections.actionGalleryFragmentToPhotoFragment(it)
         )
     })
 
+    /**
+     * Get Photos
+     * */
     private fun getPhotos() {
         viewModel.photos.observe(viewLifecycleOwner) {
             it?.let {
@@ -49,6 +50,9 @@ class GalleryFragment : Fragment() {
         }
     }
 
+    /**
+     * Handling Search actions
+     * */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_main, menu)

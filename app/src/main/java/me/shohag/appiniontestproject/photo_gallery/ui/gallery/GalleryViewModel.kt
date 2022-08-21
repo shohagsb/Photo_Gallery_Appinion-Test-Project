@@ -21,6 +21,10 @@ class GalleryViewModel @Inject constructor(
     val photos: LiveData<PhotoResponse>
         get() = _photos
 
+    init {
+        getPhotos(DEFAULT_QUERY)
+    }
+
 
     fun getPhotos(query: String) {
         viewModelScope.launch {
@@ -32,6 +36,10 @@ class GalleryViewModel @Inject constructor(
                     _photos.value = photoResponse
                 }
         }
+    }
+
+    companion object{
+        private const val DEFAULT_QUERY ="cats"
     }
 
 }
